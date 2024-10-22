@@ -13,8 +13,6 @@ const ProductList = () => {
 
     const handleAddToCart = (event) => {
         if (event.target.matches('.add-to-cart-btn')) {
-            console.log(event.target.getAttribute('data-unique'));
-            console.log(event.target.getAttribute('data-name'));
 
             const productId = event.target.getAttribute('data-id');
             const product = products.find(p => p.id === Number(productId));
@@ -26,18 +24,16 @@ const ProductList = () => {
     };
 
     return (
-        <div>
-            <h2>Products</h2>
-            <div onClick={handleAddToCart}>
+        <div className="p-4">
+            <h2 className="text-2xl font-bold mb-4">Products</h2>
+            <div onClick={handleAddToCart} className="space-y-4">
                 {products.map((product) => (
-                    <div key={product.id} style={{ marginBottom: '10px' }}>
-                        <h3>{product.name}</h3>
-                        <p>Price: ${product.price}</p>
+                    <div key={product.id} className="p-4 border rounded-lg shadow-md">
+                        <h3 className="text-xl font-semibold">{product.name}</h3>
+                        <p className="text-gray-700">Price: ${product.price}</p>
                         <button
-                            className="add-to-cart-btn"
+                            className="add-to-cart-btn mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                             data-id={product.id}
-                            data-unique={product.unique}
-                            data-name={product.name}
                         >
                             Add to Cart
                         </button>
@@ -45,10 +41,10 @@ const ProductList = () => {
                 ))}
             </div>
 
-            <h2>Cart</h2>
-            <ul>
+            <h2 className="text-2xl font-bold mt-8 mb-4">Cart</h2>
+            <ul className="list-disc pl-5">
                 {cart.map((item, index) => (
-                    <li key={index}>{item.name} - ${item.price}</li>
+                    <li key={index} className="text-gray-700">{item.name} - ${item.price}</li>
                 ))}
             </ul>
         </div>
