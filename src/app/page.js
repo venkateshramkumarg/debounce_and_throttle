@@ -42,6 +42,7 @@ function MovieSearch() {
 
   return (
     <div className="p-4 max-w-xl mx-auto">
+      <h1 className=" text-center text-2xl  mb-4 font-bold text-red-300">Search for your Movies...</h1>
       <input
         type="text"
         value={query}
