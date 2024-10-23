@@ -41,22 +41,21 @@ function MovieSearch() {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-xl mx-auto">
       <input
         type="text"
         value={query}
         onChange={handleChange}
         placeholder="Search movies..."
-        className="border px-2 py-1 rounded-md w-80"
+        className="border px-2 py-1 rounded-md w-full"
       />
       
-
       {error && <p className="text-red-500 mt-2">{error}</p>}
 
       <ul className="mt-4">
         {movies.map((movie) => (
-          <li key={movie.imdbID} className="border-b py-2">
-            <img src={movie.Poster} alt={movie.Title} className="w-12 inline-block mr-4" />
+          <li key={movie.imdbID} className="border-b py-2 flex items-center">
+            <img src={movie.Poster} alt={movie.Title} className="w-12 h-16 object-cover mr-4" />
             <span>{movie.Title} ({movie.Year})</span>
           </li>
         ))}
