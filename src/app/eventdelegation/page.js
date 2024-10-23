@@ -12,9 +12,9 @@ const ProductList = () => {
     ];
 
     const handleAddToCart = (event) => {
-        if (event.target.matches('.add-to-cart-btn')) {
-
+        if (event.target.matches('.add-to-cart-btn')) {            
             const productId = event.target.getAttribute('data-id');
+        
             const product = products.find(p => p.id === Number(productId));
             if (product) {
                 setCart((prevCart) => [...prevCart, product]);
