@@ -50,7 +50,7 @@ export default function Home() {
               than the element on which the event originated.
             </p>
             <button 
-              onClick={() => router.push('/event-delegation')}
+              onClick={() => router.push('/eventdelegation')}
               className="w-full bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600 transition-colors"
             >
               Learn Event Delegation
