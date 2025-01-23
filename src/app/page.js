@@ -1,68 +1,63 @@
-"use client"
+'use client'
+import { useRouter } from 'next/navigation'
 
-import React, { useState } from "react";
-function debounce(func, delay) {
-  let timeoutId;
-  return function (...args) {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    timeoutId = setTimeout(() => {
-      func(...args);
-    }, delay);
-  };
-}
-
-function MovieSearch() {
-  const [query, setQuery] = useState(""); 
-  const [movies, setMovies] = useState([]); 
-  const [error, setError] = useState(""); 
-
-
-  const fetchMovies = async (searchQuery) => {
-    if (!searchQuery) return;
-
-    try {
-      const response = await fetch(`https://www.omdbapi.com/?s=${searchQuery}&apikey=34cccc56`)
-      const data = await response.json();
-      console.log(data);
-      setMovies(data.Search || []);
-    } catch (err) {
-      setMovies([]);
-      setError("Failed to fetch data. Please try again.");
-    }
-  };
-
-  const debouncedFetchMovies = debounce(fetchMovies, 300); 
-
-  const handleChange = (e) => {
-    setQuery(e.target.value); 
-    debouncedFetchMovies(e.target.value);
-  };
+export default function Home() {
+  const router = useRouter();
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
-      <h1 className=" text-center text-2xl  mb-4 font-bold text-red-300">Search for your Movies...</h1>
-      <input
-        type="text"
-        value={query}
-        onChange={handleChange}
-        placeholder="Search movies..."
-        className="border px-2 py-1 rounded-md w-full"
-      />
-      
-      {error && <p className="text-red-500 mt-2">{error}</p>}
+    <main className="min-h-screen p-8 bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
+          JavaScript Performance Optimization Techniques
+        </h1>
+        
+        <div className="grid gap-8 md:grid-cols-3">
+          {/* Throttle Card */}
+          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+            <h2 className="text-2xl font-semibold mb-4 text-blue-600">Throttle</h2>
+            <p className="text-gray-600 mb-4">
+              Throttling enforces a maximum number of times a function can be called over time. 
+              It ensures a function executes at a regular interval.
+            </p>
+            <button 
+              onClick={() => router.push('/throttle')}
+              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+            >
+              Learn Throttling
+            </button>
+          </div>
 
-      <ul className="mt-4">
-        {movies.map((movie) => (
-          <li key={movie.imdbID} className="border-b py-2 flex items-center">
-            <img src={movie.Poster} alt={movie.Title} className="w-12 h-16 object-cover mr-4" />
-            <span>{movie.Title} ({movie.Year})</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+          {/* Debounce Card */}
+          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+            <h2 className="text-2xl font-semibold mb-4 text-green-600">Debounce</h2>
+            <p className="text-gray-600 mb-4">
+              Debouncing ensures that a function is only executed after a certain amount of time has passed 
+              since its last invocation.
+            </p>
+            <button 
+              onClick={() => router.push('/debounce')}
+              className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors"
+            >
+              Learn Debouncing
+            </button>
+          </div>
+
+          {/* Event Delegation Card */}
+          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+            <h2 className="text-2xl font-semibold mb-4 text-purple-600">Event Delegation</h2>
+            <p className="text-gray-600 mb-4">
+              Event delegation is a technique of handling events at a higher level in the DOM 
+              than the element on which the event originated.
+            </p>
+            <button 
+              onClick={() => router.push('/event-delegation')}
+              className="w-full bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600 transition-colors"
+            >
+              Learn Event Delegation
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  )
 }
-
-export default MovieSearch;
